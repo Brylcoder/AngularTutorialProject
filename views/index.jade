@@ -1,14 +1,9 @@
 extends layout
 
 block content
-  div(ng-app="myapp")
+  div
     div(ng-controller='HelloController')
     h2 Hello {{helloTo.title}} !
-    script.
-      angular.module("myapp", [])
-      .controller("HelloController", function($scope) {
-      $scope.helloTo = {};
-      $scope.helloTo.title = "World, AngularJS";
-      } );
+    
 
     
