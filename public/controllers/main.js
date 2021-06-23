@@ -1,5 +1,3 @@
-
-
 var myapp = angular.module('myapp', []);
 
 (function (app) {
