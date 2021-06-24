@@ -5,7 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-const mongoose = require('mongoose');
+const {MongoClient} = require('mongodb');
 
 var app = express();
 
@@ -24,9 +24,29 @@ app.use('/users', usersRouter);
 
 // Mongo connection
 
-const mongoURL = 'mongodb://localhost/mydb';
-mongoose.connect(mongoURL);
-console.log("DB Connected")
+
+// Connect to the db
+async function main(){
+
+  const uri = "mongodb://localhost:27017/mydb";
+
+
+  const client = new MongoClient(uri);
+
+  try {
+      await client.connect();
+      await  listDatabases(client);
+
+  } catch (e) {
+      console.error(e);
+  } finally {
+      await client.close();
+  }
+  console.log(client.Collections)
+}
+
+main().catch(console.error);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
