@@ -8,6 +8,9 @@ var usersRouter = require('./routes/users');
 const {MongoClient} = require('mongodb');
 
 var app = express();
+angular.module('F1FeederApp', [
+  'F1FeederApp.controllers'
+]);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -21,31 +24,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-
-// Mongo connection
-
-
-// Connect to the db
-async function main(){
-
-  const uri = "mongodb://localhost:27017/mydb";
-
-
-  const client = new MongoClient(uri);
-
-  try {
-      await client.connect();
-      await  listDatabases(client);
-
-  } catch (e) {
-      console.error(e);
-  } finally {
-      await client.close();
-  }
-  console.log(client.Collections)
-}
-
-main().catch(console.error);
 
 
 // catch 404 and forward to error handler

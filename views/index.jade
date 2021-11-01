@@ -1,22 +1,19 @@
 extends layout
 
 block content
-  div
-    div
-    h2 Hello {{helloTo.title}} !
-  div 
-   form.ui.form
-    .field
-      label First Name
-      input(type='text' name='first-name' placeholder='First Name')
-    .field
-      label Last Name
-      input(type='text' name='last-name' placeholder='Last Name')
-    .field
-      .ui.checkbox
-        input.hidden(type='checkbox' tabindex='0')
-        label I agree to the Terms and Conditions
-    button.ui.button(type='submit') Submit
+  body(ng-app='F1FeederApp' ng-controller='driversController')
+    table
+      thead
+        tr
+          th(colspan='4') Drivers Championship Standings
+      tbody
+        tr(ng-repeat='driver in driversList')
+          td {{$index + 1}}
+          td
+            img(src='img/flags/{{driver.Driver.nationality}}.png')
+            |           {{driver.Driver.givenName}} {{driver.Driver.familyName}}
+          td {{driver.Constructors[0].name}}
+          td {{driver.points}}
 
-
+   
       
